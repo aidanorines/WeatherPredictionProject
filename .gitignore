@@ -1,0 +1,12 @@
+# Downloaded and processed data: with data_scripts/download_data.py
+data/
+
+# Script output logs
+*.log
+
+# Python and Jupyter caches
+__pycache__/
+.ipynb_checkpoints/
+
+# Local virtual environment
+.venv/
