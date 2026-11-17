@@ -17,7 +17,7 @@ You need Python 3.12 or newer.
    pip install -r requirements.txt
    ```
 
-2. Download the data. This saves one file per station to `data_scripts/data/raw/`, about 104 MB in total:
+2. Download the data. This saves one file per station to `data_scripts/data/raw/`, about 104 MB in total, and each station's location to `data_scripts/data/stations.csv`:
 
    ```bash
    python data_scripts/download_data.py

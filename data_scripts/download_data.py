@@ -5,6 +5,7 @@ Usage:
     python download_data.py         # download into data/raw/, safe to re-run
 
 Saves one long-format file per station: one row per station, date and element.
+Also saves data/stations.csv: each station's name, latitude, longitude and elevation (m).
 Do not swap in the AWS by_station copies: 200 Texas stations there stopped in February 2025.
 """
 import sys
@@ -16,27 +17,33 @@ import pandas as pd
 BASE = "https://www.ncei.noaa.gov/pub/data/ghcn/daily/"
 DATA = Path(__file__).parent / "data"
 RAW = DATA / "raw"
+STATIONS = DATA / "stations.csv"
 COLS = ["ID", "DATE", "ELEMENT", "VALUE", "MFLAG", "QFLAG", "SFLAG", "OBS_TIME"]
 
 
-def texas_ids():
-    """Texas by state code, with a TMAX year range overlapping the window."""
-    stations = pd.read_fwf(BASE + "ghcnd-stations.txt", colspecs=[(0, 11), (38, 40)],
-                           names=["ID", "STATE"], dtype=str)
+def texas_stations():
+    """Texas by state code, with a TMAX year range overlapping the window, and each station's location."""
+    stations = pd.read_fwf(BASE + "ghcnd-stations.txt",
+                           colspecs=[(0, 11), (12, 20), (21, 30), (31, 37), (38, 40), (41, 71)],
+                           names=["ID", "LATITUDE", "LONGITUDE", "ELEVATION", "STATE", "NAME"],
+                           dtype={"ID": str, "STATE": str, "NAME": str})
     inventory = pd.read_fwf(BASE + "ghcnd-inventory.txt", colspecs=[(0, 11), (31, 35), (36, 40), (41, 45)],
                             names=["ID", "ELEMENT", "FIRST", "LAST"], dtype={"ID": str, "ELEMENT": str})
     tmax = inventory[(inventory.ELEMENT == "TMAX") & (inventory.FIRST <= 2025) & (inventory.LAST >= 2000)]
-    ids = sorted(set(tmax.ID) & set(stations[stations.STATE == "TX"].ID))
-    assert len(ids) > 600, f"expected about 674 stations, got {len(ids)}"
-    return ids
+    texas = stations[(stations.STATE == "TX") & stations.ID.isin(tmax.ID)].sort_values("ID")
+    assert len(texas) > 600, f"expected about 674 stations, got {len(texas)}"
+    return texas.drop(columns="STATE")
 
 
 def main():
-    ids = texas_ids()
+    stations = texas_stations()
+    ids = list(stations.ID)
     print(f"{len(ids)} Texas stations", flush=True)
     if sys.argv[1:] == ["list"]:
         return
     RAW.mkdir(parents=True, exist_ok=True)
+    # Latitude, longitude and elevation, for nearest-station inputs and level features.
+    stations.to_csv(STATIONS, index=False)
     # NOAA updates values over time, so keep the exact version for the report.
     urllib.request.urlretrieve(BASE + "ghcnd-version.txt", DATA / "ghcnd-version.txt")
     failed = []
