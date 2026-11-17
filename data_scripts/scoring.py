@@ -23,6 +23,8 @@ def score(rows, predictions):
     # Checks run before any arithmetic, since NumPy would silently repeat a short array across rows.
     if len(rows) == 0:
         raise ValueError("no rows to score")
+    if not rows.usable.all():
+        raise ValueError("score only usable rows, so every method is judged on the same days")
     if isinstance(predictions, pd.DataFrame) and not (predictions.index.equals(rows.index)
                                                       and list(predictions.columns) == TARGETS):
         raise ValueError("prediction frame must have the same rows as `rows` and columns y1 to y7")
