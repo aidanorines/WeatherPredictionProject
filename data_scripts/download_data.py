@@ -45,7 +45,9 @@ def main():
     # Latitude, longitude and elevation, for nearest-station inputs and level features.
     stations.to_csv(STATIONS, index=False)
     # NOAA updates values over time, so keep the exact version for the report.
-    urllib.request.urlretrieve(BASE + "ghcnd-version.txt", DATA / "ghcnd-version.txt")
+    # Only a fresh download records it: a re-run fills gaps and keeps the files it already has.
+    if not any(RAW.glob("*.csv.gz")):
+        urllib.request.urlretrieve(BASE + "ghcnd-version.txt", DATA / "ghcnd-version.txt")
     failed = []
     for n, station in enumerate(ids, 1):
         target = RAW / f"{station}.csv.gz"
