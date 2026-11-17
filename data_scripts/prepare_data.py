@@ -19,6 +19,7 @@ import pandas as pd
 
 DATA = Path(__file__).parent / "data"
 RAW = DATA / "raw"
+STATIONS = DATA / "stations.csv"  # every station download_data.py fetches, written before it downloads
 TABLE = DATA / "processed" / "stations.pkl"
 
 TENTHS = ["TMAX", "TMIN", "PRCP", "AWND"]  # stored as value x 10
@@ -77,6 +78,12 @@ def build():
     if not any(RAW.glob("*.csv.gz")):
         import download_data
         download_data.main()
+    # A partial download would silently drop stations and change which ones pass the coverage rule.
+    if not STATIONS.exists():
+        raise RuntimeError("data/stations.csv is missing: re-run python data_scripts/download_data.py")
+    missing = set(pd.read_csv(STATIONS).ID) - {path.name[:11] for path in RAW.glob("*.csv.gz")}
+    if missing:
+        raise RuntimeError(f"{len(missing)} station files are missing: re-run python data_scripts/download_data.py")
     no_shift = pd.read_csv(NO_SHIFT_FILE, dtype={"STATION": str}).groupby("STATION").YEAR.agg(set)
     stations = [clean_station(path, no_shift.get(path.name[:11], set())) for path in sorted(RAW.glob("*.csv.gz"))]
     stations = [s for s in stations if min(coverage(s, "train"), coverage(s, "validation")) >= MIN_COVERAGE]
