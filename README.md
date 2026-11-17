@@ -31,6 +31,12 @@ You need Python 3.12 or newer.
 
 The `data/` folder is not tracked by git.
 
+4. Optional: check the date alignment of COOP stations against nearby airports. This prints the evidence for shifting morning TMAX back a day and leaving TMIN unshifted. It also rewrites `data_scripts/no_shift.csv`, the station-years whose morning highs are already on the right day, so rebuild the table afterwards with `python data_scripts/prepare_data.py`:
+
+   ```bash
+   python data_scripts/check_date_alignment.py
+   ```
+
 ## Folders
 
 * `ProjectProposal/`: the project proposal, as Markdown and PDF
