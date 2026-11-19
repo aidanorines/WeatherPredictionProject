@@ -1,0 +1,16 @@
+stage,n_estimators,max_depth,min_samples_leaf,max_features,target,MAE lead 1,MAE lead 7,mean MAE,seconds,winner
+1 depth x leaf,100,10,5,0.33,anomaly,2.555,3.877,3.216,16,
+1 depth x leaf,100,10,20,0.33,anomaly,2.55,3.872,3.211,16,
+1 depth x leaf,100,10,50,0.33,anomaly,2.551,3.872,3.211,16,
+1 depth x leaf,100,20,5,0.33,anomaly,2.513,3.909,3.211,24,
+1 depth x leaf,100,20,20,0.33,anomaly,2.507,3.899,3.203,22,
+1 depth x leaf,100,20,50,0.33,anomaly,2.515,3.886,3.2,21,
+1 depth x leaf,100,None,5,0.33,anomaly,2.517,3.921,3.219,28,
+1 depth x leaf,100,None,20,0.33,anomaly,2.51,3.9,3.205,24,
+1 depth x leaf,100,None,50,0.33,anomaly,2.514,3.892,3.203,22,
+2 max_features,100,20,50,0.2,anomaly,2.531,3.867,3.199,13,<- best
+2 max_features,100,20,50,0.6,anomaly,2.508,3.908,3.208,37,
+2 max_features,100,20,50,1.0,anomaly,2.522,3.927,3.225,64,
+3 n_estimators,50,20,50,0.2,anomaly,2.533,3.87,3.201,7,
+3 n_estimators,300,20,50,0.2,anomaly,2.529,3.869,3.199,37,
+4 target,100,20,50,0.2,raw,2.573,3.859,3.216,11,
