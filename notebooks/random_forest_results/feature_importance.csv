@@ -1,0 +1,16 @@
+,Lead 1,Lead 7
+north_anom,0.642,-0.0
+anom,0.224,-0.006
+west_anom,0.222,-0.005
+nbr5_anom,0.152,-0.006
+state_anom_change1,0.11,-0.0
+state_anom,0.093,-0.005
+anom_mean3,0.032,-0.003
+anom_mean7,0.017,0.029
+doy_cos,0.015,-0.0
+tmax,0.014,-0.001
+tmax_mean30,0.005,0.014
+elevation,0.014,0.0
+tmin,0.014,0.002
+latitude,0.014,0.001
+longitude,0.012,0.001

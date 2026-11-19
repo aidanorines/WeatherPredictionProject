@@ -1,0 +1,16 @@
+stage,setting,n_estimators,max_depth,min_samples_leaf,max_features,target,MAE lead 1,MAE lead 7,mean MAE,seconds
+1 depth x leaf,trees=100 depth=10 leaf=5 features=0.33 target=anomaly,100,10.0,5,0.33,anomaly,2.5545189297859676,3.8767154017514978,3.215617165768733,16
+1 depth x leaf,trees=100 depth=10 leaf=20 features=0.33 target=anomaly,100,10.0,20,0.33,anomaly,2.550069299461123,3.8722530704885885,3.2111611849748556,16
+1 depth x leaf,trees=100 depth=10 leaf=50 features=0.33 target=anomaly,100,10.0,50,0.33,anomaly,2.55069666868421,3.871509914851865,3.2111032917680378,16
+1 depth x leaf,trees=100 depth=20 leaf=5 features=0.33 target=anomaly,100,20.0,5,0.33,anomaly,2.513384499747442,3.9092720363328364,3.2113282680401394,24
+1 depth x leaf,trees=100 depth=20 leaf=20 features=0.33 target=anomaly,100,20.0,20,0.33,anomaly,2.5074008474394067,3.89925317483567,3.2033270111375383,22
+1 depth x leaf,trees=100 depth=20 leaf=50 features=0.33 target=anomaly,100,20.0,50,0.33,anomaly,2.514868011206818,3.8859863880280887,3.2004271996174536,21
+1 depth x leaf,trees=100 depth=None leaf=5 features=0.33 target=anomaly,100,,5,0.33,anomaly,2.5173455090651378,3.9207421824872335,3.2190438457761856,28
+1 depth x leaf,trees=100 depth=None leaf=20 features=0.33 target=anomaly,100,,20,0.33,anomaly,2.5101271819432194,3.8997909141374367,3.204959048040328,24
+1 depth x leaf,trees=100 depth=None leaf=50 features=0.33 target=anomaly,100,,50,0.33,anomaly,2.5135991626785255,3.892328203123922,3.202963682901224,22
+2 max_features,trees=100 depth=20 leaf=50 features=0.2 target=anomaly,100,20.0,50,0.2,anomaly,2.530767954754013,3.8665187236166867,3.1986433391853497,13
+2 max_features,trees=100 depth=20 leaf=50 features=0.6 target=anomaly,100,20.0,50,0.6,anomaly,2.5080176736224407,3.908112048908254,3.2080648612653473,37
+2 max_features,trees=100 depth=20 leaf=50 features=1.0 target=anomaly,100,20.0,50,1.0,anomaly,2.521856036780313,3.9272226369248,3.2245393368525566,64
+3 n_estimators,trees=50 depth=20 leaf=50 features=0.2 target=anomaly,50,20.0,50,0.2,anomaly,2.532810358185363,3.869521653814449,3.201166005999906,7
+3 n_estimators,trees=300 depth=20 leaf=50 features=0.2 target=anomaly,300,20.0,50,0.2,anomaly,2.528893801963063,3.8694520406964066,3.199172921329735,37
+4 target,trees=100 depth=20 leaf=50 features=0.2 target=raw,100,20.0,50,0.2,raw,2.5732496664385636,3.8585007413745736,3.2158752039065686,11
