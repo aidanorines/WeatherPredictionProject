@@ -84,7 +84,7 @@ score(rows, forecasts["damped anomaly"])  # the simple forecast to beat
 
 * `ProjectProposal/`: the project proposal, as Markdown and PDF
 * `data_scripts/`: scripts that download, clean and score the data, and check the date alignment
-* `notebooks/`: `simple_forecasts.ipynb` scores the simple forecasts on the validation years; each model adds its own training notebook on its branch
+* `notebooks/`: `simple_forecasts.ipynb` scores the simple forecasts on the validation years; `random_forest.ipynb` and `gradient_boosting.ipynb` train and score the two models, and `random_forest_results/` holds the random forest's tables and charts
 
 ## Branches
 
